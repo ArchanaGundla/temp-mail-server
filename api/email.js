@@ -5,24 +5,35 @@ import {
   createTempEmail,
   updateEmailMessages
 } from '../utils/emailUtils.js';
+
 export default async function handler(req, res) {
   try {
-    if (req.method !== 'GET') {
-      return res.status(405).json({ error: 'Method not allowed' });
+    if (req.method === 'GET') {
+      // Just return a new temporary email
+      const tempEmail = createTempEmail();
+      return res.status(200).json({
+        message: "Temporary email created successfully.",
+        email: tempEmail.email,
+        expiresIn: tempEmail.expiresIn,
+        expirationTime: tempEmail.expirationTime,
+        domain: TEMP_EMAIL_DOMAIN
+      });
     }
 
-    await testImapConnection();
-    const config = getWorkingConfig();
+    if (req.method === 'POST') {
+      const { emailAddress, messages } = req.body;
 
-    res.status(200).json({
-      message: "Backend ready",
-      config,
-      domain: TEMP_EMAIL_DOMAIN,
-      lifetime: TEMP_EMAIL_LIFETIME / 60000
-    });
+      if (!emailAddress || !Array.isArray(messages)) {
+        return res.status(400).json({ error: "Invalid request body" });
+      }
 
+      updateEmailMessages(emailAddress, messages);
+      return res.status(200).json({ message: "Messages updated for email" });
+    }
+
+    return res.status(405).json({ error: "Method not allowed" });
   } catch (err) {
-    console.error("❌ Error in /api/email.js:", err);
-    res.status(500).json({ error: "Server crashed", details: err.message });
+    console.error("💥 API error:", err);
+    return res.status(500).json({ error: "Internal Server Error", details: err.message });
   }
 }
