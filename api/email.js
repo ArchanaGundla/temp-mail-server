@@ -1,3 +1,4 @@
+// api/email.js
 import { applyCors } from '../utils/cors.js';
 import { testImapConnection, getWorkingConfig } from '../utils/imapUtils.js';
 import {
@@ -15,14 +16,29 @@ export default async function handler(req, res) {
 
   try {
     if (req.method === 'GET') {
-      // generate email…
-    } else if (req.method === 'POST') {
-      // update messages…
-    } else {
-      return res.status(405).json({ error: 'Method not allowed' });
+      // Generate a new temp email
+      const tempEmail = createTempEmail();
+      return res.status(200).json({
+        message: 'Temporary email created',
+        email: tempEmail.email,
+        expiresIn: tempEmail.expiresIn,
+        expirationTime: tempEmail.expirationTime,
+        domain: TEMP_EMAIL_DOMAIN
+      });
     }
+
+    if (req.method === 'POST') {
+      const { emailAddress, messages } = req.body;
+      if (!emailAddress || !Array.isArray(messages)) {
+        return res.status(400).json({ error: 'Invalid request body' });
+      }
+      updateEmailMessages(emailAddress, messages);
+      return res.status(200).json({ message: 'Messages updated' });
+    }
+
+    return res.status(405).json({ error: 'Method not allowed' });
   } catch (err) {
-    console.error(err);
-    return res.status(500).json({ error: 'Internal Server Error' });
+    console.error('API error:', err);
+    return res.status(500).json({ error: 'Internal Server Error', details: err.message });
   }
 }
