@@ -1,5 +1,5 @@
 const TEMP_EMAIL_DOMAIN = 'trueelement.in';
-const TEMP_EMAIL_LIFETIME = 600000; // 10 minutes
+const TEMP_EMAIL_LIFETIME = 600000;
 
 const tempEmails = new Map();
 
