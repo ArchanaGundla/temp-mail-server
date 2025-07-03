@@ -4,15 +4,12 @@
     { "src": "api/*.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1.js" }
-  ],
-  "headers": [
     {
-      "source": "/api/(.*)",
+      "src": "/api/(.*)",
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "https://temp-mail-olive-ten.vercel.app"
+          "value": "*"
         },
         {
           "key": "Access-Control-Allow-Methods",
@@ -22,7 +19,8 @@
           "key": "Access-Control-Allow-Headers",
           "value": "Content-Type"
         }
-      ]
+      ],
+      "dest": "/api/$1.js"
     }
   ]
 }
