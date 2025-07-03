@@ -1,10 +1,11 @@
-// utils/cors.js
+// api/health.js
+import { applyCors } from '../utils/cors.js';
 
-export function applyCors(res) {
-  // Allow any origin (you can lock this down to your frontend domain if you like)
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  // Allow these methods
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
-  // Allow these headers in requests
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+export default function handler(req, res) {
+  applyCors(res);
+  if (req.method === 'OPTIONS') {
+    // Preflight request
+    return res.status(200).end();
+  }
+  res.status(200).json({ status: 'ok' });
 }
