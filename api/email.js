@@ -1,6 +1,10 @@
 import { testImapConnection, getWorkingConfig } from '../utils/imapUtils.js';
-import { TEMP_EMAIL_DOMAIN, TEMP_EMAIL_LIFETIME } from '../utils/emailUtils.js';
-
+import {
+  TEMP_EMAIL_DOMAIN,
+  TEMP_EMAIL_LIFETIME,
+  createTempEmail,
+  updateEmailMessages
+} from '../utils/emailUtils.js';
 export default async function handler(req, res) {
   try {
     if (req.method !== 'GET') {
