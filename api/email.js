@@ -5,6 +5,7 @@ import {
   createTempEmail,
   updateEmailMessages
 } from '../utils/emailUtils.js';
+import { applyCors } from '../utils/cors.js';
 
 export default async function handler(req, res) {
   try {
