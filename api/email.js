@@ -1,4 +1,4 @@
-// api/email.js
+
 import { applyCors } from '../utils/cors.js';
 import { testImapConnection, getWorkingConfig } from '../utils/imapUtils.js';
 import {
@@ -16,7 +16,6 @@ export default async function handler(req, res) {
 
   try {
     if (req.method === 'GET') {
-      // Generate a new temp email
       const tempEmail = createTempEmail();
       return res.status(200).json({
         message: 'Temporary email created',
