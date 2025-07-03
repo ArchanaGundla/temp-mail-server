@@ -1,4 +1,3 @@
-// vercel.json
 {
   "version": 2,
   "builds": [
@@ -15,8 +14,14 @@
           "key": "Access-Control-Allow-Origin",
           "value": "https://temp-mail-olive-ten.vercel.app"
         },
-        { "key": "Access-Control-Allow-Methods", "value": "GET,POST,OPTIONS" },
-        { "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET,POST,OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type"
+        }
       ]
     }
   ]
