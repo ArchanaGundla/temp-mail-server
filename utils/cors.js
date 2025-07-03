@@ -1,11 +1,5 @@
-// api/health.js
-import { applyCors } from '../utils/cors.js';
-
-export default function handler(req, res) {
-  applyCors(res);
-  if (req.method === 'OPTIONS') {
-    // Preflight request
-    return res.status(200).end();
-  }
-  res.status(200).json({ status: 'ok' });
+export function applyCors(res) {
+  res.setHeader('Access-Control-Allow-Origin', 'https://temp-mail-olive-ten.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 }
