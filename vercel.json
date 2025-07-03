@@ -9,7 +9,7 @@
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "*"
+          "value": "https://temp-mail-olive-ten.vercel.app"
         },
         {
           "key": "Access-Control-Allow-Methods",
