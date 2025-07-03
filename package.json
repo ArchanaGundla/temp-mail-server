@@ -1,0 +1,9 @@
+{
+  "name": "temp-mail-server",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "imap": "^0.8.19",
+    "mailparser": "^3.6.4"
+  }
+}
