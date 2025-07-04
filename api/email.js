@@ -7,7 +7,6 @@ import {
   createTempEmail,
   updateEmailMessages
 } from '../utils/emailUtils.js';
-import cors from '../../lib/cors-middleware';
 
 export default async function handler(req, res) {
   applyCors(res);
