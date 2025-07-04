@@ -1,4 +1,3 @@
-import cors from '../../lib/cors-middleware';
 export default function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "https://temp-mail-olive-ten.vercel.app");
   res.setHeader("Access-Control-Allow-Methods", "GET,OPTIONS");
